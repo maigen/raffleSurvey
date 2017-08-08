@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Landing extends Component {
   render() {
-    let btnTxt = "Get My Number";
+    const btnTxt = "Get My Number";
     return (
       <div>
         <h3>Epicodus Alumni</h3>
@@ -23,7 +23,7 @@ class Landing extends Component {
             </p>
           </div>
           <div>
-            <label></label>
+            <label>{this.props.question}</label>
             <textarea rows="5" cols="30" maxLength="1000" required="required"/>
           </div>
           <button>{btnTxt}</button>
