@@ -2,7 +2,77 @@
   text-align: center;
 }
 
+.ticket {
+  position: relative;
+  height: 100vh;
+  background-color: #CB904D;
+  color: white;
+}
+.ticket .header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+}
+
+.ticket .header h1 {
+  font-size: 5em;
+  margin-bottom: .5em;
+}
+
+.ticket .header p {
+ display: inline-block;
+ position:relative;
+ padding: .7em;
+ padding-left: 2em;
+ background: #51A3A3;
+ color: rgba(255,255,255,.9);
+ font-weight: bold;
+ font-size: 4em;
+}
+
+.ticket .header p:before {
+ content: '';
+ position: absolute;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ z-index:1;
+
+ background: -moz-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -moz-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
+             -moz-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
+ background: -o-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -o-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
+             -o-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
+ background: -ms-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -ms-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
+             -ms-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
+ background: -webkit-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -webkit-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
+             -webkit-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
+}
+.ticket .header p:after {
+  content: '';
+  position:absolute;
+  top:.25em;
+  right:.25em;
+  bottom:.25em;
+  left:.25em;
+  border: 1px rgba(0,0,0,.3) dashed;
+  outline: 1px rgba(255,255,255,.5) dashed;
+}
+
 /* answering remaining questions out of scope for quick pet project */
 .extraForm {
   display: none;
+}
+
+/* Media Queries */
+@media (max-width: 375px) {
+  .ticket .header p {
+    font-size: 3.5em;
+  }
 }

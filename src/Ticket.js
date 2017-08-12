@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+// import { Jumbotron } from 'react-bootstrap';
 
 class Ticket extends Component {
   render() {
     return (
-      <div>
-        <h3>Your Ticket</h3>
-        <h1>631423</h1>
+      <div className="ticket">
+        <div className="header">
+          <h1>Your Ticket</h1>
+          <p>631423</p>
+        </div>
         <form className="extraForm">
           <h5>Answer Our Other Questions, Too?</h5>
           <div>
