@@ -5,8 +5,8 @@
 .ticket {
   position: relative;
   height: 100vh;
-  background-color: #CB904D;
-  color: white;
+  background-color: #EAE6E5;
+  color: #8F8073;
 }
 .ticket .header {
   position: absolute;
@@ -19,6 +19,7 @@
 .ticket .header h1 {
   font-size: 5em;
   margin-bottom: .5em;
+  font-family: futura, sans-serif;
 }
 
 .ticket .header p {
@@ -26,7 +27,7 @@
  position:relative;
  padding: .7em;
  padding-left: 2em;
- background: #51A3A3;
+ background: #5B9279;
  color: rgba(255,255,255,.9);
  font-weight: bold;
  font-size: 4em;
@@ -41,18 +42,18 @@
  left: 0;
  z-index:1;
 
- background: -moz-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
-             -moz-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
-             -moz-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
- background: -o-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
-             -o-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
-             -o-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
- background: -ms-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
-             -ms-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
-             -ms-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
- background: -webkit-radial-gradient(.6em .6em, circle, #CB904D .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
-             -webkit-radial-gradient(1em 50%, circle, #CB904D .35em, rgba(255,255,255,0) .4em),
-             -webkit-radial-gradient(1em 47%, circle, #CB904D .4em, transparent .43em);
+ background: -moz-radial-gradient(.6em .6em, circle, #EAE6E5 .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -moz-radial-gradient(1em 50%, circle, #EAE6E5 .35em, rgba(255,255,255,0) .4em),
+             -moz-radial-gradient(1em 47%, circle, #EAE6E5 .4em, transparent .43em);
+ background: -o-radial-gradient(.6em .6em, circle, #EAE6E5 .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -o-radial-gradient(1em 50%, circle, #EAE6E5 .35em, rgba(255,255,255,0) .4em),
+             -o-radial-gradient(1em 47%, circle, #EAE6E5 .4em, transparent .43em);
+ background: -ms-radial-gradient(.6em .6em, circle, #EAE6E5 .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -ms-radial-gradient(1em 50%, circle, #EAE6E5 .35em, rgba(255,255,255,0) .4em),
+             -ms-radial-gradient(1em 47%, circle, #EAE6E5 .4em, transparent .43em);
+ background: -webkit-radial-gradient(.6em .6em, circle, #EAE6E5 .55em, rgba(255,255,255,0) .6em) -.6em -.6em,
+             -webkit-radial-gradient(1em 50%, circle, #EAE6E5 .35em, rgba(255,255,255,0) .4em),
+             -webkit-radial-gradient(1em 47%, circle, #EAE6E5 .4em, transparent .43em);
 }
 .ticket .header p:after {
   content: '';
