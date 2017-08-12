@@ -12,6 +12,7 @@ class App extends Component {
       "What would you like to see at future React meet-ups?",
       "So...what's up with Jason Browne anyway?"
     ],
+      allQuestions = JSON.parse(JSON.stringify(questions)),
       randNum = Math.floor(Math.random() * questions.length),
       firstQuest = questions.splice(randNum, 1);
     return (
@@ -22,7 +23,9 @@ class App extends Component {
               <Landing question={firstQuest}/>
             }/>
             <Route path="/ticket" component={Ticket}/>
-            <Route path="/ambin" component={AmbIn}/>
+            <Route path="/ambin" render={() => 
+              <AmbIn questions={allQuestions}/>
+            }/>
           </div>
         </Router>
       </div>
