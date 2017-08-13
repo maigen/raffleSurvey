@@ -14,7 +14,7 @@ class App extends Component {
     ],
       allQuestions = JSON.parse(JSON.stringify(questions)),
       randNum = Math.floor(Math.random() * questions.length),
-      firstQuest = questions.splice(randNum, 1);
+      firstQuest = String(questions.splice(randNum, 1));
     return (
       <div className="App">
         <Router>

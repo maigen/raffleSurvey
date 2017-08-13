@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import {
-  FormControl,
-  InputGroup,
-  Radio
-} from 'react-bootstrap';
+import { FormControl, Radio } from 'react-bootstrap';
 
 class Landing extends Component {
   componentWillMount() {
     this.setState({
+      "answer": '',
       "isSurveyVisible": true,
       "name": ''
     });
@@ -27,17 +24,20 @@ class Landing extends Component {
             onChange={this.recordInfo.bind(this, "name")}
           />
           
-          <Radio onClick={this.toggleSurvey.bind(this, true)} defaultChecked>
+          <Radio name="useCase" onClick={this.toggleSurvey.bind(this, true)} defaultChecked>
             I Want To Answer A Survey question
           </Radio>
-          <Radio onClick={this.toggleSurvey.bind(this, false)}>
+          <Radio name="useCase" onClick={this.toggleSurvey.bind(this, false)}>
             I Just Need To Get My Ticket Number
           </Radio>
           
-          <InputGroup className={surveyClass}>
-            <label>{this.props.question}</label>
-            <textarea rows="5" cols="30" maxLength="1000" required="required"/>
-          </InputGroup>
+          <FormControl
+            className={surveyClass}
+            componentClass="textarea"
+            type="text"
+            label={this.props.question}
+            onChange={this.recordInfo.bind(this, "answer")}
+          />
           <button onClick={this.sendRequest.bind(this)}>{btnTxt}</button>
         </div>
       </div>
@@ -57,8 +57,10 @@ class Landing extends Component {
       return;
     }
     
-    if (this.state.isSurveyVisible) {
+    if (this.state.isSurveyVisible && this.state.answer !== "") {
       console.log(this.state.name);
+      console.log(this.props.question);
+      console.log(this.state.answer);
       // put survey answer into appropriate array
       // get the next ticket number and assign it to name in entrants
       // push ticket number into entries
@@ -69,6 +71,8 @@ class Landing extends Component {
       // get ticket number for name
     }
     // route to Ticket with ticket number
+    
+    // rearrange cases to handle validation possibilities, maybe pop a message
   }
   
   
