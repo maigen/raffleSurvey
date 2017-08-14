@@ -1,3 +1,4 @@
+/*global firebase*/
 import React, { Component } from 'react';
 import { FormControl, ControlLabel, Radio } from 'react-bootstrap';
 
@@ -25,7 +26,7 @@ class Landing extends Component {
           />
 
           <Radio name="useCase" onClick={this.toggleSurvey.bind(this, true)} defaultChecked>
-            I Want To Answer A Survey question
+            I Want To Answer A Survey Question
           </Radio>
           <Radio name="useCase" onClick={this.toggleSurvey.bind(this, false)}>
             I Just Need To Get My Ticket Number
@@ -58,21 +59,34 @@ class Landing extends Component {
     }
 
     if (this.state.isSurveyVisible && this.state.answer !== "") {
-      console.log(this.state.name);
-      console.log(this.props.question);
-      console.log(this.state.answer);
-      // put survey answer into appropriate array
-      // get the next ticket number and assign it to name in entrants
-      // push ticket number into entries
-      // make sure next user will get a new ticket number
-    } else {
+      // read: nextTicket
+      firebase.database().ref('nextTicket').once('value').then(function(snapshot) {
+        let myTicket = snapshot.val() || 600000;
+        console.log('My Ticket: ', myTicket);
+        
+        firebase.database().ref().set({
+          nextTicket: myTicket + 7
+        })
+        // firebase.database().ref('entries').push(myTicket);
+      });
+            
+      // write: newTicket pushed into "array" of entries
+      // write: name/newTicket together as object into array of entrants
+          console.log(this.state.name);
+          //potential for overwriting
+      // write: answer pushed into responses object where answer is key for array
+          console.log(this.props.question);
+          console.log(this.state.answer);
+      
+      } else {
       // verify name exists in FB
         //(what if not???)
       // get ticket number for name
     }
     // route to Ticket with ticket number
 
-    // rearrange cases to handle validation possibilities, maybe pop a message
+    // rearrange cases to handle validation possibilities
+      // maybe pop a message or change border colors
   }
 
 
