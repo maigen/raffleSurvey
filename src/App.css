@@ -8,6 +8,13 @@
 
 .App {
   text-align: center;
+  margin: 10px auto;
+}
+
+.radio input {
+  margin-right: 5px;
+  padding-bottom: 3px;
+  height: 16px;
 }
 
 .question-form {

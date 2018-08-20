@@ -13,7 +13,9 @@ class Landing extends Component {
 
   render() {
     const btnTxt = this.state.isSurveyVisible ? "Submit" : "Grab Number";
-    let surveyClass = this.state.isSurveyVisible ? "" : "extraForm";
+    const surveyClass = this.state.isSurveyVisible ? "" : "extraForm";
+    const questionText = this.state.isSurveyVisible ? this.props.question : "";
+    
     return (
       <div>
         <h3>Epicodus Alumni</h3>
@@ -32,7 +34,7 @@ class Landing extends Component {
             I Just Need To Get My Ticket Number
           </Radio>
 
-          <ControlLabel>{this.props.question}</ControlLabel>
+          <ControlLabel>{questionText}</ControlLabel>
           <FormControl
             className={surveyClass}
             componentClass="textarea"
@@ -54,29 +56,41 @@ class Landing extends Component {
   }
 
   sendRequest() {
-    if (this.state.name === "") {
+    const name = this.state.name;
+    const fire = firebase.database();
+    
+    if (name === "") {
       return;
     }
 
-    if (this.state.isSurveyVisible && this.state.answer !== "") {
-      // read: nextTicket
-      firebase.database().ref('nextTicket').once('value').then(function(snapshot) {
-        let myTicket = snapshot.val() || 600000;
-        console.log('My Ticket: ', myTicket);
-        
-        firebase.database().ref().set({
-          nextTicket: myTicket + 7
+    if (this.state.isSurveyVisible) {
+      if(this.state.answer === "") {
+        return;
+      }
+
+      fire.ref('nextTicket').once('value').then(function(snapshot) {
+        const myTicket = snapshot.val() || 600000;        
+        fire.ref().set({
+          nextTicket: myTicket + 7,
         })
-        // firebase.database().ref('entries').push(myTicket);
+        
+        //TODO: add check to prevent multiple entries
+        // const entryRef = fire.ref('entries').push();
+        // entryRef.set({
+        //   name,
+        //   ticket: myTicket
+        // });
+        // fire.ref('entries').push({
+        //   name,
+        //   ticket: myTicket
+        // })
       });
-            
-      // write: newTicket pushed into "array" of entries
-      // write: name/newTicket together as object into array of entrants
-          console.log(this.state.name);
-          //potential for overwriting
+      
+      
       // write: answer pushed into responses object where answer is key for array
-          console.log(this.props.question);
-          console.log(this.state.answer);
+      // firebase.data.ref('answers[this.props.question]').push(this.state.answer);
+          //console.log(this.props.question);
+          //console.log(this.state.answer);
       
       } else {
       // verify name exists in FB
