@@ -69,21 +69,14 @@ class Landing extends Component {
       }
 
       fire.ref('nextTicket').once('value').then(function(snapshot) {
-        const myTicket = snapshot.val() || 600000;        
-        fire.ref().set({
-          nextTicket: myTicket + 7,
-        })
+        const myTicket = snapshot.val() || 600000;
+        fire.ref('nextTicket').set(myTicket + 7)
         
-        //TODO: add check to prevent multiple entries
-        // const entryRef = fire.ref('entries').push();
-        // entryRef.set({
-        //   name,
-        //   ticket: myTicket
-        // });
-        // fire.ref('entries').push({
-        //   name,
-        //   ticket: myTicket
-        // })
+        const entriesRef = fire.ref().child('entries').push().key;
+        fire.ref('entries').child(entriesRef).set({
+          name,
+          ticket: myTicket
+        });
       });
       
       
