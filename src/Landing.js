@@ -57,8 +57,11 @@ class Landing extends Component {
 
   sendRequest() {
     const name = this.state.name;
+    const answer = this.state.answer;
+    const question = this.props.question;
     const fire = firebase.database();
     
+    console.log(question)
     if (name === "") {
       return;
     }
@@ -77,6 +80,9 @@ class Landing extends Component {
           name,
           ticket: myTicket
         });
+        
+        const answersRef = fire.ref().child('answers/' + question).push().key;
+        fire.ref('answers/' + question).child(answersRef).set(answer);
       });
       
       
@@ -90,6 +96,7 @@ class Landing extends Component {
         //(what if not???)
       // get ticket number for name
     }
+    
     // route to Ticket with ticket number
 
     // rearrange cases to handle validation possibilities
