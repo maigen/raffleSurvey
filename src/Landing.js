@@ -1,5 +1,6 @@
 /*global firebase*/
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import { FormControl, ControlLabel, Radio } from 'react-bootstrap';
 
 class Landing extends Component {
@@ -61,11 +62,11 @@ class Landing extends Component {
     const question = this.props.question;
     const fire = firebase.database();
     
-    console.log(question)
     if (name === "") {
       return;
     }
 
+    this.props.saveName(name);
     if (this.state.isSurveyVisible) {
       if(this.state.answer === "") {
         return;
@@ -83,27 +84,14 @@ class Landing extends Component {
         
         const answersRef = fire.ref().child('answers/' + question).push().key;
         fire.ref('answers/' + question).child(answersRef).set(answer);
-      });
-      
-      
-      // write: answer pushed into responses object where answer is key for array
-      // firebase.data.ref('answers[this.props.question]').push(this.state.answer);
-          //console.log(this.props.question);
-          //console.log(this.state.answer);
-      
-      } else {
+      });      
+    } else {
       // verify name exists in FB
         //(what if not???)
       // get ticket number for name
     }
-    
-    // route to Ticket with ticket number
-
-    // rearrange cases to handle validation possibilities
-      // maybe pop a message or change border colors
+    this.props.history.push('/ticket');
   }
-
-
 }
 
-export default Landing;
+export default withRouter(Landing);

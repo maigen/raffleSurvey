@@ -6,11 +6,17 @@ import Ticket from './Ticket';
 import AmbIn from './AmbIn';
 
 class App extends Component {
+  componentWillMount() {
+    this.setState({
+      userName: ''
+    })
+  }
+  
   render() {
     const questions = [
-      "How do you prefer to React?",
-      "What would you like to see at future React meet-ups?",
-      "So...what's up with Jason Browne anyway?"
+      "What presentation topics would you like at future EA Meet-Ups?",
+      "Other than speakers and panels, what would you like to see at future EA Meet-Ups?",
+      "What would motivate you to join a group hacking project?"
     ],
       allQuestions = JSON.parse(JSON.stringify(questions)),
       randNum = Math.floor(Math.random() * questions.length),
@@ -20,9 +26,11 @@ class App extends Component {
         <Router>
           <div>
             <Route exact={true} path="/" render={() => 
-              <Landing question={firstQuest}/>
+              <Landing question={firstQuest} saveName={this.saveName.bind(this)}/>
             }/>
-            <Route path="/ticket" component={Ticket}/>
+            <Route path="/ticket" render={() =>
+              <Ticket userName={this.state.userName}/>
+            }/>
             <Route path="/ambin" render={() => 
               <AmbIn questions={allQuestions}/>
             }/>
@@ -30,6 +38,10 @@ class App extends Component {
         </Router>
       </div>
     );
+  }
+  
+  saveName(name) {
+    this.setState({userName: name})
   }
 }
 

@@ -1,13 +1,15 @@
+/*global firebase*/
 import React, { Component } from 'react';
-// import { Jumbotron } from 'react-bootstrap';
 
 class Ticket extends Component {
   render() {
+    const ticketNumber = this.getTicket() || 654321;
+    
     return (
       <div className="ticket">
         <div className="header">
-          <h1>Your Ticket</h1>
-          <p>631423</p>
+          <h1>Ticket for {this.props.userName}</h1>
+          <p>{ticketNumber}</p>
         </div>
         <form className="extraForm">
           <h5>Answer Our Other Questions, Too?</h5>
@@ -22,6 +24,18 @@ class Ticket extends Component {
         </form>
       </div>
     )
+  }
+  
+  getTicket() {
+    return null;
+    // firebase.database()
+    //   .ref('entities')
+    //   .orderbyChild('name')
+    //   .equalTo(this.props.userName)
+    //   // .once('value')
+    //   .then(function(snapshot) {
+    //     return snapshot.val().ticket;
+    //   })
   }
 }
 
