@@ -1,7 +1,7 @@
 /*global firebase*/
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-import { FormControl, ControlLabel, Radio } from 'react-bootstrap';
+import { FormControl, ControlLabel } from 'react-bootstrap';
 
 class Landing extends Component {
   componentWillMount() {
@@ -28,12 +28,12 @@ class Landing extends Component {
             onChange={this.recordInfo.bind(this, "name")}
           />
 
-          <Radio name="useCase" onClick={this.toggleSurvey.bind(this, true)} defaultChecked>
+          {/* <Radio name="useCase" onClick={this.toggleSurvey.bind(this, true)} defaultChecked>
             I Want To Answer A Survey Question
           </Radio>
           <Radio name="useCase" onClick={this.toggleSurvey.bind(this, false)}>
             I Just Need To Get My Ticket Number
-          </Radio>
+          </Radio> */}
 
           <ControlLabel>{questionText}</ControlLabel>
           <FormControl
@@ -61,12 +61,12 @@ class Landing extends Component {
     const answer = this.state.answer;
     const question = this.props.question;
     const fire = firebase.database();
+    const storeDetails = this.props.saveDetails;
     
     if (name === "") {
       return;
     }
 
-    this.props.saveName(name);
     if (this.state.isSurveyVisible) {
       if(this.state.answer === "") {
         return;
@@ -76,6 +76,7 @@ class Landing extends Component {
         const myTicket = snapshot.val() || 600000;
         fire.ref('nextTicket').set(myTicket + 7)
         
+        storeDetails(name, myTicket);
         const entriesRef = fire.ref().child('entries').push().key;
         fire.ref('entries').child(entriesRef).set({
           name,

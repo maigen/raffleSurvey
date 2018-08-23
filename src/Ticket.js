@@ -1,15 +1,15 @@
-/*global firebase*/
+// /*global firebase*/
 import React, { Component } from 'react';
 
 class Ticket extends Component {
   render() {
-    const ticketNumber = this.getTicket() || 654321;
+    // const ticketNumber = this.getTicket() || 654321;
     
     return (
       <div className="ticket">
         <div className="header">
           <h1>Ticket for {this.props.userName}</h1>
-          <p>{ticketNumber}</p>
+          <p>{this.props.ticketNumber}</p>
         </div>
         <form className="extraForm">
           <h5>Answer Our Other Questions, Too?</h5>

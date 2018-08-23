@@ -8,7 +8,8 @@ import AmbIn from './AmbIn';
 class App extends Component {
   componentWillMount() {
     this.setState({
-      userName: ''
+      userName: '',
+      ticketNumber: ''
     })
   }
   
@@ -26,10 +27,10 @@ class App extends Component {
         <Router>
           <div>
             <Route exact={true} path="/" render={() => 
-              <Landing question={firstQuest} saveName={this.saveName.bind(this)}/>
+              <Landing question={firstQuest} saveDetails={this.saveDetails.bind(this)}/>
             }/>
             <Route path="/ticket" render={() =>
-              <Ticket userName={this.state.userName}/>
+              <Ticket userName={this.state.userName} ticketNumber={this.state.ticketNumber}/>
             }/>
             <Route path="/ambin" render={() => 
               <AmbIn questions={allQuestions}/>
@@ -40,8 +41,10 @@ class App extends Component {
     );
   }
   
-  saveName(name) {
-    this.setState({userName: name})
+  saveDetails(name, ticket) {
+    this.setState(
+      {userName: name, ticketNumber: ticket}
+    )
   }
 }
 
