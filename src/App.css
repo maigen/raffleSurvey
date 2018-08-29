@@ -98,8 +98,24 @@
   display: none;
 }
 
+
+/****************** AMBIN PAGE  *********************/
 .winners {
   min-height: 50px
+}
+
+.activeQuestion {
+  color: teal;
+  text-decoration: underline;
+}
+
+.activeAnswers {
+  text-decoration: none;
+  list-style: none;
+}
+
+.inactiveAnswers {
+  display: none;
 }
 
 /* Media Queries */

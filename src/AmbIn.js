@@ -1,10 +1,11 @@
 /*global firebase*/
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
 
 class AmbIn extends Component {
   componentWillMount() {
     this.setState({
+      activeItem: null,
+      answers: [],
       entries: [],
       winners: [],
       displayData: { ticket: '', name: ''}
@@ -12,10 +13,17 @@ class AmbIn extends Component {
   }
   
   render() {
-    const tabs = [];
+    const clickableQuestions = [];
+    const items = this.state.answers;
     
-    this.props.questions.forEach(function(q, i) {
-      tabs.push(<Tab key={i+1} eventKey={i+1} title={q}></Tab>);
+    this.props.questions.forEach((q, i) => {
+      clickableQuestions.push(
+      <div className={this.state.activeItem === i ? 'activeQuestion' : ''} key={`question${i+1}`} onClick={this.presentResponses.bind(this, q, i)}>
+        {q}
+        <ul className={this.state.activeItem === i ? 'activeAnswers': 'inactiveAnswers'}>
+          {items}
+        </ul>
+      </div>);
     });
     
     return (
@@ -29,14 +37,29 @@ class AmbIn extends Component {
         </div>
         
         <div>
-          {/* <label>Get Responses</label> */}
-          <Tabs id="surveyQuestions">
-            {tabs}
-          </Tabs>
+          <label>Get Responses</label>
+          <div id="surveyQuestions">
+            {clickableQuestions}
+          </div>
           
         </div>
       </div>
     )
+  }
+  
+  presentResponses(question, index) {
+    firebase.database().ref('answers/' + question).once('value').then(snapshot => {
+      const answerData = snapshot.val()
+      const answers = Object.keys(answerData).reduce((acc, key, i) => {
+        const answer = answerData[key];
+        acc.push(<li className="listedAnswer" key={i+1}>{answer}</li>)
+        return acc;
+      }, []);
+      this.setState({
+        activeItem: index,
+        answers
+      });
+    });
   }
   
   selectWinner() {
