@@ -118,6 +118,14 @@
   display: none;
 }
 
+.resetButton {
+  margin-top: 100px;
+  background-color: #b33a3a;
+  border-radius: 5%;
+  border: maroon 2px inset;
+  color: white;
+}
+
 /* Media Queries */
 @media (max-width: 375px) {
   .ticket .header p {

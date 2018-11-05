@@ -43,6 +43,8 @@ class AmbIn extends Component {
           </div>
           
         </div>
+        
+        <button onClick={this.resetSurvey.bind(this)} className="resetButton">Reset Raffle</button>
       </div>
     )
   }
@@ -50,15 +52,18 @@ class AmbIn extends Component {
   presentResponses(question, index) {
     firebase.database().ref('answers/' + question).once('value').then(snapshot => {
       const answerData = snapshot.val()
-      const answers = Object.keys(answerData).reduce((acc, key, i) => {
-        const answer = answerData[key];
-        acc.push(<li className="listedAnswer" key={i+1}>{answer}</li>)
-        return acc;
-      }, []);
-      this.setState({
-        activeItem: index,
-        answers
-      });
+      if (answerData != null) {        
+        const answers = Object.keys(answerData).reduce((acc, key, i) => {
+          const answer = answerData[key];
+          acc.push(<li className="listedAnswer" key={i+1}>{answer}</li>)
+          return acc;
+        }, []);
+        
+        this.setState({
+          activeItem: index,
+          answers
+        });
+      } //TODO: else case for a "no responses" at all? OR should that be handled case-by-case
     });
   }
   
@@ -110,6 +115,13 @@ class AmbIn extends Component {
         });
       });
     }
+  }
+  
+  resetSurvey() {
+    // TODO: handle questions clearing with same function as questions setting
+    const fire = firebase.database();
+    fire.ref('entries').set({});
+    fire.ref('answers').set({});
   }
 }
 
