@@ -1,15 +1,16 @@
-// /*global firebase*/
+/*global firebase*/
 import React, { Component } from 'react';
 
 class Ticket extends Component {
   render() {
-    // const ticketNumber = this.getTicket() || 654321;
-    
+    const ticketNumber = this.getTicket() || 654321;
+    // const ticketNumber = this.props.ticketNumber || this.getTicket()
+        
     return (
       <div className="ticket">
         <div className="header">
           <h1>Ticket for {this.props.userName}</h1>
-          <p>{this.props.ticketNumber}</p>
+          <p>{ticketNumber}</p>
         </div>
         <form className="extraForm">
           <h5>Answer Our Other Questions, Too?</h5>
@@ -27,15 +28,22 @@ class Ticket extends Component {
   }
   
   getTicket() {
-    return null;
-    // firebase.database()
-    //   .ref('entities')
-    //   .orderbyChild('name')
-    //   .equalTo(this.props.userName)
-    //   // .once('value')
-    //   .then(function(snapshot) {
-    //     return snapshot.val().ticket;
-    //   })
+    // TODO: why getting called TWICE!?
+    firebase.database()
+      .ref('entries')
+      .orderByChild('name')
+      .equalTo('xxy')  //JUST FOR NOW
+      // .equalTo(this.props.userName);
+      .once('value').then(snapshot => {
+      if (snapshot != null) {
+        const userData = snapshot.val();
+        const userDataRef = Object.keys(userData)[0];
+        const ticket = userData[userDataRef].ticket
+        console.log('snapshot value: ', ticket);
+        return ticket;
+      };
+      return 'No ticket found';
+    });
   }
 }
 
